@@ -11,6 +11,22 @@
 |
 */
 
+
+// Route::get('/{id}', function ($id) {
+//     return $id;
+// })->where(["id" => "[0-9]+","name" => "[a-z]+"]);
+
+
+
+
 Route::get('/', function () {
-    return view('welcome');
+   
+    return view('test',['name' => 'nihao']);
 });
+
+Route::post('/check','TestController@index');
+
+// Route::get('/', 'TestController@index');
+// Route::get('/', function () {
+//     return view('welcome');
+// });
