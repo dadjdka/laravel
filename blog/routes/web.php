@@ -20,7 +20,6 @@
 
 
 Route::get('/', function () {
-   
     return view('test',['name' => 'nihao']);
 });
 
