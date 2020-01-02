@@ -25,6 +25,8 @@ Route::get('/', function () {
 });
 
 Route::post('/check','TestController@index');
+Route::post('/captchaShow','TestController@captchaShow');
+
 
 // Route::get('/', 'TestController@index');
 // Route::get('/', function () {
