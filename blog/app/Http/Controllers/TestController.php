@@ -10,6 +10,7 @@ class TestController extends BaseController {
     public function index() {
     
         
+        
         $data =Request::all();
         $rules = [
             'captcha' => 'required|captcha',//required表示必填 captcha表示进行验证码验证
