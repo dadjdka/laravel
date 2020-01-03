@@ -18,16 +18,22 @@
 
 
 
-
 Route::get('/', function () {
+     
     return view('test',['name' => 'nihao']);
+    // return view('test',['name' => 'nihao']);
 });
 
 Route::post('/check','TestController@index');
-Route::post('/captchaShow','TestController@captchaShow');
+// Route::post('/checkCapt','TestController@checkCapt');
+// Route::get('/captchaShow','TestController@captchaShow');
 
 
 // Route::get('/', 'TestController@index');
 // Route::get('/', function () {
 //     return view('welcome');
 // });
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

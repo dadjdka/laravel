@@ -38,7 +38,7 @@
     </form>
 
 
-    <form name="form" action="./captchaShow" method="post">
+    <form name="form" action="./checkCapt" method="post">
         <div class="flex-center position-ref full-height">
           
 
@@ -50,12 +50,10 @@
             
                 <div class="links">
                 
-                <img src="{{captcha_src('flat')}}" onclick="this.src='{{url()->full()}}/captcha/flat?'+Math.random()" title="点击图片重新获取验证码">
+                <img src="{{url('/captchaShow')}}" onclick="this.src='{{url('/captchaShow')}}?'+Math.random()" title="点击图片重新获取验证码">
                 <input type="text" name="captcha">
                 {{csrf_field()}}
-                @if($errors->has('captcha'))
-                    <span>{{$errors->first('captcha')}}</span>
-                @endif
+               
                 <input type="submit" value="验证二"/>
                 </div>
             </div>

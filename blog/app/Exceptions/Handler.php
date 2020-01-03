@@ -46,6 +46,10 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+
+        // if (!($exception instanceof AuthenticationException)) {
+        //     return response()->view('404.'.$exception->getStatusCode(), [],$exception->getStatusCode());
+        // }
         return parent::render($request, $exception);
     }
 }

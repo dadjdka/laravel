@@ -2,10 +2,14 @@
 namespace App\Http\Controllers;
 use Illuminate\Routing\Controller as BaseController;
 use App\Http\Requests;
-
+use Gregwar\Captcha\CaptchaBuilder;
+use Illuminate\Support\Facades\Redis;
 use Request;
 class TestController extends BaseController {
+
     public function index() {
+    
+        
         $data =Request::all();
         $rules = [
             'captcha' => 'required|captcha',//required表示必填 captcha表示进行验证码验证
@@ -28,8 +32,10 @@ class TestController extends BaseController {
     }
 
     public function captchaShow(){
+      
         //生成验证码图片的Builder对象，配置相应属性
         $builder = new CaptchaBuilder();
+        // $builder = new CaptchaBuilder();
         // 设置背景颜色
         $builder->setBackgroundColor(220, 210, 230);
         $builder->setMaxAngle(25);
@@ -42,8 +48,22 @@ class TestController extends BaseController {
         //把内容存入session
         session(['phrase'=>$phrase]);
         //生成图片
-        header("Cache-Control: no-cache, must-revalidate");
+        header("Cache-Control: no-cache, no-store, must-revalidate");
         header('Content-Type: image/jpeg');
         $builder->output();
+    }
+
+    public function checkCapt(Request $request)
+    {
+        $data =Request::all();
+        if (session('phrase') == $data['captcha']) {
+            //用户输入验证码正确
+            //清除session
+            session()->forget('phrase');
+            return '验证码正确';
+        } else {
+            //用户输入验证码错误
+            return '验证码输入错误';
+        }
     }
 }
