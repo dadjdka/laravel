@@ -4,12 +4,13 @@ use Illuminate\Routing\Controller as BaseController;
 use App\Http\Requests;
 use Gregwar\Captcha\CaptchaBuilder;
 use Illuminate\Support\Facades\Redis;
+use Illuminate\Support\Facades\Cookie;
 use Request;
 class TestController extends BaseController {
 
     public function index() {
     
-        
+        $value = Cookie::get('key');
         
         $data =Request::all();
         $rules = [
@@ -24,6 +25,7 @@ class TestController extends BaseController {
         $validator = \Validator::make($data, $rules, $messages);
         if($validator->passes()){
             //验证通过
+            return $value;
         }else{
             //验证失败
             //$validator->errors() 获取错误信息
@@ -67,4 +69,36 @@ class TestController extends BaseController {
             return '验证码输入错误';
         }
     }
+
+
+    public function updateSysConfig(Request $request) {
+        $rules = [
+            'config_name' => 'required',
+        ];
+    
+        // Cookie::queue(Cookie::forget('refreshToken'));
+
+        // $this->validate($request, $rules);
+        // $redis = Redis::connection
+       
+        // $redis->get("123");
+        // $id = request('id');
+        // $data = SysConfig::find($id);
+    
+        // $update_result = $data->update(request()->all());
+        // if ($update_result) {
+            
+        //     $redis = Redis::connection();
+        //     $redis_key = 'xxx:' . $data->config_key;
+        //     $redis->set($redis_key, request('config_value'));
+        // } else {
+        //     return back()->withErrors('服务器内部错误，更新失败！');
+        // }
+        // return "545";
+    }
+
+    public function text() {
+        return '11';
+    }
+   
 }

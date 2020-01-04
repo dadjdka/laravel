@@ -17,23 +17,28 @@
 // })->where(["id" => "[0-9]+","name" => "[a-z]+"]);
 
 
+// Route::get('/', 'TestController@text');
 
-Route::get('/', function () {
+// Route::get('/', 'TestController@updateSysConfig');
+
+// Route::get('/', function () {
      
-    return view('test',['name' => 'nihao']);
-    // return view('test',['name' => 'nihao']);
-});
+//     return view('test',['name' => 'nihao']);
+//     // return view('test',['name' => 'nihao']);
+// });
 
-Route::post('/check','TestController@index');
+// Route::post('/check','TestController@index');
 // Route::post('/checkCapt','TestController@checkCapt');
 // Route::get('/captchaShow','TestController@captchaShow');
 
 
 // Route::get('/', 'TestController@index');
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
-Auth::routes();
+include __DIR__."/admin/web.php";
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Auth::routes();
+
+// Route::get('/home', 'HomeController@index')->name('home');
