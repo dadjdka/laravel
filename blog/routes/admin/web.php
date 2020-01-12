@@ -1,7 +1,8 @@
 <?php
 
-Route::group(['prefix' => "admin"],function(){
-    Route::get("/test",function(){
-        return "asd";
-    });
+
+
+Route::group(['prefix' => "admin",'namespace' => 'Admin'],function(){
+
+    Route::get("/login",'EntryController@loginForm');
 });

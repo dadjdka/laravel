@@ -22,7 +22,7 @@
 // Route::get('/', 'TestController@updateSysConfig');
 
 // Route::get('/', function () {
-     
+
 //     return view('test',['name' => 'nihao']);
 //     // return view('test',['name' => 'nihao']);
 // });
