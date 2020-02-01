@@ -18,7 +18,7 @@ class EntryController extends Controller
 
     public function index()
     {
-        return '后台';
+        return view('admin.index');
     }
 
     //登录视图

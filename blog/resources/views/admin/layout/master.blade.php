@@ -12,6 +12,7 @@
         <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
         <script src="./lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="./js/xadmin.js"></script>
+        <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
         <!--[if lt IE 9]>
           <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -24,7 +25,7 @@
     </head>
     <body class="index">
         <!-- 顶部开始 -->
-        <div class="container">
+        <div class="container" style="width:100%">
             <div class="logo">
                 <a href="./index.html">X-admin v2.2</a></div>
             <div class="left_open">
@@ -52,6 +53,18 @@
                                 <i class="iconfont">&#xe6b8;</i>在tab打开刷新</a></dd>
                     </dl>
                 </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">网站首页</a>
+
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">实战培训</a>
+
+                </li>
+                <li class="layui-nav-item">
+                    <a href="javascript:;">论坛讨论</a>
+
+                </li>
             </ul>
             <ul class="layui-nav right" lay-filter="">
                 <li class="layui-nav-item">
@@ -59,11 +72,11 @@
                     <dl class="layui-nav-child">
                         <!-- 二级菜单 -->
                         <dd>
-                            <a onclick="xadmin.open('个人信息','http://www.baidu.com')">个人信息</a></dd>
+                            <a onclick="xadmin.open('个人信息','/admin/my')">我的账号</a></dd>
                         <dd>
                             <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
                         <dd>
-                            <a href="./login.html">退出</a></dd>
+                            <a href="/admin/logout">退出</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item to-index">
@@ -78,14 +91,14 @@
                 <ul id="nav">
                     <li>
                         <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
-                            <cite>会员管理</cite>
+                            <i class="iconfont left-nav-li" lay-tips="系统管理">&#xe6b8;</i>
+                            <cite>系统管理</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('统计页面','welcome1.html')">
+                                <a onclick="xadmin.add_tab('我的资料','welcome1.html')">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>统计页面</cite></a>
+                                    <cite>我的资料</cite></a>
                             </li>
                             <li>
                                 <a onclick="xadmin.add_tab('会员列表(静态表格)','member-list.html')">
@@ -125,18 +138,18 @@
                     <li>
                         <a href="javascript:;">
                             <i class="iconfont left-nav-li" lay-tips="订单管理">&#xe723;</i>
-                            <cite>订单管理</cite>
+                            <cite>内容管理</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
                                 <a onclick="xadmin.add_tab('订单列表','order-list.html')">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>订单列表</cite></a>
+                                    <cite>内容标签</cite></a>
                             </li>
                             <li>
                                 <a onclick="xadmin.add_tab('订单列表1','order-list1.html')">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>订单列表1</cite></a>
+                                    <cite>视频管理</cite></a>
                             </li>
                         </ul>
                     </li>
@@ -338,15 +351,19 @@
                     <li class="home">
                         <i class="layui-icon">&#xe68e;</i>我的桌面</li></ul>
                 <div class="layui-unselect layui-form-select layui-form-selected" id="tab_right">
+
                     <dl>
                         <dd data-type="this">关闭当前</dd>
                         <dd data-type="other">关闭其它</dd>
                         <dd data-type="all">关闭全部</dd></dl>
                 </div>
                 <div class="layui-tab-content">
-                    <div class="layui-tab-item layui-show">
+                    {{-- 模板替换 --}}
+                    @yield('content')
+                    {{-- <div class="layui-tab-item layui-show">
                         <iframe src='./welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
-                    </div>
+
+                    </div> --}}
                 </div>
                 <div id="tab_show"></div>
             </div>
