@@ -10,6 +10,12 @@ use Illuminate\Support\Facades\Auth;
 class EntryController extends Controller
 {
 
+    public function __construct()
+    {
+        // ->验证器->排除验证
+        $this->middleware('admin.auth')->except(['loginForm','login']);
+    }
+
     public function index()
     {
         return '后台';
