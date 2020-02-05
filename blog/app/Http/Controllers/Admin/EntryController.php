@@ -18,6 +18,7 @@ class EntryController extends Controller
 
     public function index()
     {
+
         return view('admin.index');
     }
 
@@ -40,5 +41,12 @@ class EntryController extends Controller
         //分配
         return redirect('/admin/login')->with('error',"用户密码或账号错误");
     }
+    //退出登录
+    public function logout(){
+        //去模型中查找自定义
+        Auth::guard('admin')->logout();
 
+        //跳转首页
+        return redirect('/admin/login');
+    }
 }

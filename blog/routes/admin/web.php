@@ -11,5 +11,12 @@ Route::group(['prefix' => "admin",'namespace' => 'Admin'],function(){
     //后台爱登录主页
     Route::get("/index",'EntryController@index');
 
+    //退出登录
+    Route::get("/logout",'EntryController@logout');
+
+    //修改密码
+    Route::get("/changPassword",'MyController@posswordForm');
+    Route::post("/changPassword",'MyController@changPassword');
+
 
 });

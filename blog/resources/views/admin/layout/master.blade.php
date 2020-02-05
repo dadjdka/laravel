@@ -68,15 +68,15 @@
             </ul>
             <ul class="layui-nav right" lay-filter="">
                 <li class="layui-nav-item">
-                    <a href="javascript:;">admin</a>
+                    <a href="javascript:;">{{Auth::guard('admin')->user()->username}}</a>
                     <dl class="layui-nav-child">
                         <!-- 二级菜单 -->
                         <dd>
-                            <a onclick="xadmin.open('个人信息','/admin/my')">我的账号</a></dd>
+                            <a href="/laravel/blog/public/admin/changPassword">我的账号</a></dd>
                         <dd>
                             <a onclick="xadmin.open('切换帐号','http://www.baidu.com')">切换帐号</a></dd>
                         <dd>
-                            <a href="/admin/logout">退出</a></dd>
+                            <a href="/laravel/blog/public/admin/logout">退出</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item to-index">
@@ -96,7 +96,8 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('我的资料','welcome1.html')">
+                                <a href="/laravel/blog/public/admin/changPassword">
+                                {{-- <a onclick="xadmin.add_tab('我的资料','welcome1.html')"> --}}
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>我的资料</cite></a>
                             </li>
@@ -380,5 +381,5 @@
                 s.parentNode.insertBefore(hm, s);
             })();</script>
     </body>
-
+    @include('admin.layout.errors')
 </html>
