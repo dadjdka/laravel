@@ -10,8 +10,11 @@
         <link rel="stylesheet" href="./css/font.css">
         <link rel="stylesheet" href="./css/xadmin.css">
         <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
+        <script type="text/javascript" src="./js/jquery.min.js"></script>
         <script src="./lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="./js/xadmin.js"></script>
+
+
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
         <!--[if lt IE 9]>
@@ -382,4 +385,11 @@
             })();</script>
     </body>
     @include('admin.layout.errors')
+    @include('flash::message')
+    <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(function () {
+            $('#flash-overlay-modal').modal();
+        });
+    </script>
 </html>

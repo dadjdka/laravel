@@ -25,7 +25,7 @@
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">确认密码</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="confirm_password">
+                            <input type="text" class="form-control" name="password_confirmation">
                         </div>
                     </div>
                 </div>
