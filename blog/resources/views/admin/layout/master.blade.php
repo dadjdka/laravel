@@ -7,12 +7,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
         <meta http-equiv="Cache-Control" content="no-siteapp" />
-        <link rel="stylesheet" href="./css/font.css">
-        <link rel="stylesheet" href="./css/xadmin.css">
+        <link rel="stylesheet" href="/laravel/blog/public/admin/css/font.css">
+        <link rel="stylesheet" href="/laravel/blog/public/admin/css/xadmin.css">
         <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
-        <script type="text/javascript" src="./js/jquery.min.js"></script>
-        <script src="./lib/layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="./js/xadmin.js"></script>
+        <script type="text/javascript" src="/laravel/blog/public/admin/js/jquery.min.js"></script>
+        <script src="/laravel/blog/public/admin/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="/laravel/blog/public/admin/js/xadmin.js"></script>
 
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
@@ -71,7 +71,7 @@
             </ul>
             <ul class="layui-nav right" lay-filter="">
                 <li class="layui-nav-item">
-                    <a href="javascript:;">{{Auth::guard('admin')->user()->username}}</a>
+                    <a href="javascript:;">{{ Auth::guard('admin')->user()->username }}</a>
                     <dl class="layui-nav-child">
                         <!-- 二级菜单 -->
                         <dd>
@@ -99,7 +99,7 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="/laravel/blog/public/admin/changPassword">
+                                <a href="changPassword">
                                 {{-- <a onclick="xadmin.add_tab('我的资料','welcome1.html')"> --}}
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>我的资料</cite></a>
@@ -146,7 +146,7 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('订单列表','order-list.html')">
+                                <a href="tag">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>内容标签</cite></a>
                             </li>

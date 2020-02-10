@@ -18,5 +18,7 @@ Route::group(['prefix' => "admin",'namespace' => 'Admin'],function(){
     Route::get("/changPassword",'MyController@posswordForm');
     Route::post("/changPassword",'MyController@changPassword');
 
+    //标签管理
+    Route::resource('tag', 'TagController');
 
 });
