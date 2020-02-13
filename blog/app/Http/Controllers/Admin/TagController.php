@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\TagRequest;
+use App\Model\Tag;
 use Illuminate\Http\Request;
 
 class TagController extends Controller
@@ -33,9 +35,10 @@ class TagController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(TagRequest $request, Tag $model)
     {
-        //
+        $model->create($request->all());
+        return redirect('./admin/tag');
     }
 
     /**

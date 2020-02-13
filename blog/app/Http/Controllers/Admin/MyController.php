@@ -16,6 +16,7 @@ class MyController extends Controller
     {
         $modal = Auth::guard('admin')->user();
         // dd($modal);
+        //修改密码
         $modal->password = bcrypt($request['password']);
         $modal->save();
         flash('密码修改成功')->overlay();
