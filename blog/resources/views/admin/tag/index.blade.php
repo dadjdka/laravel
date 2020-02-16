@@ -8,7 +8,7 @@
             {{csrf_field()}}
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    <h3 class="panel-title">视频播放器</h3>
+                    <h3 class="panel-title">视频标签列表</h3>
                 </div>
 
                 <div class="panel-body">
@@ -21,21 +21,51 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($data as $item)
+
+
                             <tr>
-                                <td></td>
-                                <td></td>
+                                <td> {{$item['id']}} </td>
+                                <td> {{$item['name']}} </td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
-                                        <a class="btn btn-default">编辑</a>
-                                        <a class="btn btn-default">删除</a>
+                                    <a href="tag/{{$item['id']}}" class="btn btn-default">编辑</a>
+                                        <a href="javascript:;" onclick="del({{$item['id']}})" class="btn btn-default">删除</a>
 
                                     </div>
                                 </td>
                             </tr>
+                            @endforeach
                         </tbody>
                     </table>
                 </div>
             </div>
 
         </form>
+
+        <script>
+            function del(id){
+                layer.confirm('确定要删除吗?', {icon: 3, title:'提示'}, function(index){
+
+                    $.ajax({
+                        url: 'tag/'+id,
+                        method: 'DELETE',
+                        success: function(res){
+
+
+
+                            if (res.valid == 1) {
+                                layer.msg('删除成功',{ icon: 1,time: 1000} ,function(){
+                                    location.reload()
+                                });
+                            }
+
+                        }
+                    })
+
+                });
+            }
+
+
+        </script>
 @endsection

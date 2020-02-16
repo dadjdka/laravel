@@ -16,7 +16,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        return view("admin.tag.index");
+        $data = Tag::get();
+
+        return view("admin.tag.index",compact('data'));
     }
 
     /**
@@ -83,6 +85,8 @@ class TagController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //删除
+        Tag::destroy($id);
+        return response()->json(['message' => '删除成功','valid' => 1]);
     }
 }

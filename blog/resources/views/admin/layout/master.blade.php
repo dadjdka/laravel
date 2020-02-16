@@ -4,6 +4,7 @@
         <meta charset="UTF-8">
         <title>后台登录-X-admin2.2</title>
         <meta name="renderer" content="webkit|ie-comp|ie-stand">
+        <meta name="csrf-token" content="{{ csrf_token() }}">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
         <meta http-equiv="Cache-Control" content="no-siteapp" />
@@ -14,6 +15,13 @@
         <script src="/laravel/blog/public/admin/lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="/laravel/blog/public/admin/js/xadmin.js"></script>
 
+        <script>
+            $.ajaxSetup({
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                }
+            });
+        </script>
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
         <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
