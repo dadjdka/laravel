@@ -29,7 +29,7 @@
                                 <td> {{$item['name']}} </td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
-                                    <a href="tag/{{$item['id']}}" class="btn btn-default">编辑</a>
+                                    <a href="tag/{{$item['id']}}/edit" class="btn btn-default">编辑</a>
                                         <a href="javascript:;" onclick="del({{$item['id']}})" class="btn btn-default">删除</a>
 
                                     </div>
@@ -55,7 +55,7 @@
 
 
                             if (res.valid == 1) {
-                                layer.msg('删除成功',{ icon: 1,time: 1000} ,function(){
+                                layer.msg(res.message,{ icon: 1,time: 1000} ,function(){
                                     location.reload()
                                 });
                             }

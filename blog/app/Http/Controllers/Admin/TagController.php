@@ -7,8 +7,10 @@ use App\Http\Requests\TagRequest;
 use App\Model\Tag;
 use Illuminate\Http\Request;
 
-class TagController extends Controller
+class TagController extends CommController
 {
+
+
     /**
      * Display a listing of the resource.
      *
@@ -62,7 +64,8 @@ class TagController extends Controller
      */
     public function edit($id)
     {
-        //
+        $model = Tag::find($id);
+        return view('admin.tag.edit',compact('model'));
     }
 
     /**
@@ -74,7 +77,13 @@ class TagController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $model = Tag::find($id);
+        //赋值
+        $model['name'] = $request['name'];
+        //保存
+        $model->save();
+        //返回
+        return redirect('admin/tag');
     }
 
     /**
@@ -87,6 +96,6 @@ class TagController extends Controller
     {
         //删除
         Tag::destroy($id);
-        return response()->json(['message' => '删除成功','valid' => 1]);
+        return $this->success('删除成功');
     }
 }

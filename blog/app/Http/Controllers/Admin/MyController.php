@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\AdminPost;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-class MyController extends Controller
+class MyController extends CommController
 {
     public function posswordForm()
     {
