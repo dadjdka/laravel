@@ -37,6 +37,8 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::any('/component/uploader', 'Component\UploadController@uploader');
+Route::any('/component/fileslists', 'Component\UploadController@fileslists');
 include __DIR__."/admin/web.php";
 
 // Auth::routes();

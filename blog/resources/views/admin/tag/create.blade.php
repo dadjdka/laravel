@@ -1,8 +1,8 @@
 @extends('admin.layout.master')
 @section('content')
         <ul class="nav nav-tabs" role="tablist">
-            <li><a href="/laravel/blog/public/admin/tag">标签列表</a></li>
-            <li class="active"><a href="/tag/create">新增标签</a></li>
+            <li><a href="../tag">标签列表</a></li>
+            <li class="active"><a href="../tag/create">新增标签</a></li>
         </ul>
         <form method="post" class="form-horzontal" action="../tag" role="form">
             {{csrf_field()}}

@@ -1,7 +1,6 @@
 <?php
 
 
-
 Route::group(['prefix' => "admin",'namespace' => 'Admin'],function(){
     //后台登录
     Route::get("/login",'EntryController@loginForm');
@@ -20,5 +19,8 @@ Route::group(['prefix' => "admin",'namespace' => 'Admin'],function(){
 
     //标签管理
     Route::resource('tag', 'TagController');
+
+    //课程管理
+    Route::resource('lesson', 'LessonController');
 
 });

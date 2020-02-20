@@ -8,12 +8,14 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
         <meta http-equiv="Cache-Control" content="no-siteapp" />
-        <link rel="stylesheet" href="/laravel/blog/public/admin/css/font.css">
-        <link rel="stylesheet" href="/laravel/blog/public/admin/css/xadmin.css">
+        <link rel="stylesheet" href="../css/font.css">
+        <link rel="stylesheet" href="../css/xadmin.css">
         <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
-        <script type="text/javascript" src="/laravel/blog/public/admin/js/jquery.min.js"></script>
-        <script src="/laravel/blog/public/admin/lib/layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="/laravel/blog/public/admin/js/xadmin.js"></script>
+        <script type="text/javascript" src="../js/jquery.min.js"></script>
+        <script src="../lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="../js/xadmin.js"></script>
+        <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/js/fileinput.min.js"></script>
+        <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/js/locales/zh.js"></script>
 
         <script>
             $.ajaxSetup({
@@ -24,6 +26,7 @@
         </script>
 
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+        <link href="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/css/fileinput.min.css" rel="stylesheet">
         <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
         <!--[if lt IE 9]>
           <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -154,7 +157,7 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="tag">
+                                <a href="../tag">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>内容标签</cite></a>
                             </li>
@@ -369,7 +372,7 @@
                         <dd data-type="other">关闭其它</dd>
                         <dd data-type="all">关闭全部</dd></dl>
                 </div>
-                <div class="layui-tab-content">
+                <div class="layui-tab-content" style="overflow:auto">
                     {{-- 模板替换 --}}
                     @yield('content')
                     {{-- <div class="layui-tab-item layui-show">
