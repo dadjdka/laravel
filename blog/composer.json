@@ -9,9 +9,11 @@
     "license": "MIT",
     "require": {
         "php": "^7.2",
+        "aliyuncs/oss-sdk-php": "^2.3",
         "fideloper/proxy": "^4.0",
         "gregwar/captcha": "^1.1",
         "guzzlehttp/guzzle": "^6.5",
+        "johnlui/aliyun-oss": "^2.2",
         "laracasts/flash": "^3.0",
         "laravel/cashier": "^10.5",
         "laravel/framework": "^6.2",

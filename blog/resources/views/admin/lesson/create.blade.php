@@ -6,6 +6,11 @@
     }
 </style>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
+{{-- <script src="/node_modules/hdjs/component/util.js"></script> --}}
+<script src="/node_modules/hdjs/config.js"></script>
+<script src="/node_modules/hdjs/require.js"></script>
+
+
 
         <ul class="nav nav-tabs" role="tablist">
             <li><a href="/laravel/blog/public/admin/lesson">课程列表</a></li>
@@ -30,14 +35,14 @@
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">介绍</label>
                         <div class="col-sm-10">
-                            <textarea name="introduce" class="form-control" rows="5"></textarea>
+                            <textarea name="introduce" class="form-control" rows="5" required></textarea>
                         </div>
 
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">预览图</label>
                         <div class="col-sm-10">
-                            <input id="preview" type="file" name="preview"  class="form-control" data-min-file-count="1" >
+                            <input id="preview" type="file" name="preview"  class="form-control" data-min-file-count="1" required >
                             {{-- <input type="text" class="form-control" name="preview"  required value="no.jpg"> --}}
                         </div>
 
@@ -167,7 +172,10 @@ $(function () {
                                     <input type="text" class="form-control" v-model="v.path">
                                 </div>
                             </div>
+
+
                         </div>
+
                         <div class="panel-footer">
                             <button class="btn btn-success btn-sm" @click.prevent="del(k)">删除视频</button>
                         </div>
@@ -177,8 +185,17 @@ $(function () {
                 <div class="panel-footer">
                     <button class="btn btn-default" @click.prevent="add">添加视频</button>
                 </div>
-                <textarea name="" id="" cols="30" rows="10" hidden>@{{videos}}</textarea>
+                <textarea name="videos"  hidden>@{{videos}}</textarea>
             </div>
+
+            <div class="form-group">
+                <input type="text" class="form-control">
+                <span class="input-group-btn">
+                    <button class="btn btn-default" type="button" id="pickVideo"> 上传文件</button>
+                </span>
+
+            </div>
+
 
             <button class="btn btn-primary">保存数据</button>
         </form>
@@ -201,4 +218,37 @@ $(function () {
                 },
             })
         </script>
+
+            <script>
+            function upload(){
+
+
+                require(['oss'],function(oss){
+                    var id ='#pickVideo';
+                    var uploader = oss.upload({
+                        //获取签名
+                        serverUrl: '/component/oss?',
+                        //上传目录
+                        dir: 'vid',
+                        //按键元素
+                        pick: id,
+                        accept:{
+                            title:'Images',
+                        }
+                    });
+                    uploader.on('startUpload',function(){
+                        console.log('开始上传');
+                    })
+                    uploader.on('uploadSuccess',function(file,response){
+                        console.log('上传成功')
+                    })
+                    uploader.on('uploadProgress',function(file,percentage){
+                        console.log('上传进度')
+                    })
+                    uploader.on('uploadComplete',function(){
+                        console.log('上传结束')
+                    })
+                });
+            }
+            </script>
 @endsection

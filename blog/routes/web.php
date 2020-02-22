@@ -33,12 +33,14 @@
 
 
 // Route::get('/', 'TestController@index');
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 
+Route::get('','Admin\EntryController@login');
 Route::any('/component/uploader', 'Component\UploadController@uploader');
 Route::any('/component/fileslists', 'Component\UploadController@fileslists');
+Route::any('/component/oss','Component\OssController@sign');
 include __DIR__."/admin/web.php";
 
 // Auth::routes();

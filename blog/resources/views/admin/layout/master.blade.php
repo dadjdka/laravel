@@ -14,6 +14,7 @@
         <script type="text/javascript" src="../js/jquery.min.js"></script>
         <script src="../lib/layui/layui.js" charset="utf-8"></script>
         <script type="text/javascript" src="../js/xadmin.js"></script>
+
         <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/js/fileinput.min.js"></script>
         <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/js/locales/zh.js"></script>
 
@@ -157,12 +158,12 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="../tag">
+                                <a href="./tag">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>内容标签</cite></a>
                             </li>
                             <li>
-                                <a onclick="xadmin.add_tab('订单列表1','order-list1.html')">
+                                <a href="./lesson">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>视频管理</cite></a>
                             </li>

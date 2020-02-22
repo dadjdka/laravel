@@ -24,6 +24,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "ali-oss": "^6.5.1",
         "hdjs": "^4.0.18"
     }
 }

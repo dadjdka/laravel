@@ -17,6 +17,7 @@
                             <tr>
                                 <th width="100">编号</th>
                                 <th>课程名称</th>
+                                <th>视频数量</th>
                                 <th width="120">操作</th>
                             </tr>
                         </thead>
@@ -26,7 +27,8 @@
 
                             <tr>
                                 <td> {{$item['id']}} </td>
-                                <td> {{$item['name']}} </td>
+                                <td> {{$item['title']}} </td>
+                                <td> {{$item->videos()->count()}} </td>
                                 <td>
                                     <div class="btn-group btn-group-sm">
                                     <a href="tag/{{$item['id']}}/edit" class="btn btn-default">编辑</a>

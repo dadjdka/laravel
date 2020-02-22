@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Model\Leseson;
+use App\Model\Lesson;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller
@@ -15,7 +15,7 @@ class LessonController extends Controller
      */
     public function index()
     {
-        $data = Leseson::get();
+        $data = Lesson::get();
         return view('admin.lesson.index',compact('data'));
     }
 
@@ -35,9 +35,23 @@ class LessonController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Lesson $leseson)
     {
-        //
+        $leseson['title'] = $request['title'];
+        $leseson['introduce'] = $request['introduce'];
+        $leseson['preview'] = $request['preview'];
+        $leseson['iscommend'] = $request['iscommend'];
+        $leseson['ishot'] = $request['ishot'];
+        $leseson['click'] = $request['click'];
+        $leseson->save();
+
+        $videos = json_decode($request['videos'],true);
+
+        foreach($videos as $video){
+            $leseson->videos()->create($video);
+        }
+
+        return redirect('/admin/lesson');
     }
 
     /**
