@@ -6,9 +6,7 @@
     }
 </style>
 <script src="https://unpkg.com/vue/dist/vue.js"></script>
-{{-- <script src="/node_modules/hdjs/component/util.js"></script> --}}
-<script src="/node_modules/hdjs/config.js"></script>
-<script src="/node_modules/hdjs/require.js"></script>
+
 
 
 
@@ -169,7 +167,13 @@ $(function () {
                             <div class="form-group">
                                 <label for="" class="col-sm-2 control-label">视频地址</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" v-model="v.path">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" v-model="v.path">
+                                        <span class="input-group-btn">
+                                            <input type="file" class="form-control"  :id="v.id">
+                                            {{-- <button class="btn btn-defaul" type="button" >上传</button> --}}
+                                        </span>
+                                    </div>
                                 </div>
                             </div>
 
@@ -185,89 +189,20 @@ $(function () {
                 <div class="panel-footer">
                     <button class="btn btn-default" @click.prevent="add">添加视频</button>
                 </div>
-                <textarea name="videos"  hidden>@{{videos}}</textarea>
+                <textarea name="videos"  >@{{videos}}</textarea>
             </div>
 
-            {{-- <div class="form-group">
-                <input type="text" class="form-control">
-                <span class="input-group-btn">
-                    <button class="btn btn-default" type="button" id="pickVideo"> 上传文件</button>
-                </span>
 
-            </div> --}}
-
-            <div class="form-group">
-                <label for="" class="col-sm-2 control-label">上传文件</label>
-                <div class="col-sm-10">
-                    <input id="vid" type="file" name="vid"  class="form-control" data-min-file-count="1" required >
-                    {{-- <input type="text" class="form-control" name="preview"  required value="no.jpg"> --}}
-                </div>
-
-                <script>
-$(function () {
-//0.初始化fileinput
-var oFileInput = new FileInput();
-oFileInput.Init("vid", "/component/oss?");
-});
-var FileInput = function () {
-var oFile = new Object();
-
-//初始化fileinput控件（第一次初始化）
-oFile.Init = function (ctrlName, uploadUrl) {
-    var control = $('#' + ctrlName);
-
-    //初始化上传控件的样式
-    control.fileinput({
-        language: 'zh', //设置语言
-        uploadUrl: uploadUrl, //上传的地址
-        allowedFileExtensions: ['jpg', 'gif', 'png'],//接收的文件后缀
-        //showUploadedThumbs:false,
-        // uploadClass: 'hidden',
-        showUpload: false, //是否显示上传按钮
-        showCaption: false,//是否显示标题
-        browseClass: "btn btn-info", //按钮样式
-        dropZoneEnabled: false,//是否显示拖拽区域
-        //minImageWidth: 150, //图片的最小宽度
-        //minImageHeight: 150,//图片的最小高度
-        //maxImageWidth: 150,//图片的最大宽度
-        //maxImageHeight: 150,//图片的最大高度
-        maxFileSize: 2048,//单位为kb，如果为0表示不限制文件大小
-        maxFileCount: 2, //表示允许同时上传的最大文件个数
-        minFileCount: 1,
-        enctype: 'multipart/form-data',
-        validateInitialCount: true,
-        previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
-        msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
-        fileActionSettings : {
-            // showUpload: false,
-            // showRemove: false,
-        //    showZoom:false
-        }
-    });
 
 
 
-    //导入文件上传完成之后的事件
-    $("#vid").on("fileuploaded", function (event, data, previewId, index) {
-        console.log('455')
-        alert(data.response.code);
-        // $("#divControl").hide();
-    });
+                <script>
 
 
-
-    $('#vid').on('fileerror', function(event, data, msg) {
-
-        console.log(data)
-
-    });
-}
-return oFile;
-};
 
 
                 </script>
-            </div>
+
 
             <button class="btn btn-primary">保存数据</button>
         </form>
@@ -276,12 +211,17 @@ return oFile;
             new Vue({
                 el:"#app",
                 data:{
-                    videos:[{ title :'',path:''}]
+                    videos:[]
                 },
                 methods:{
                     // 添加
                     add:function(){
-                        this.videos.push({title:'',path:''});
+                        var field = {title: '',path: '',id:'vid'+Date.parse(new Date())}
+                        this.videos.push(field);
+                        setTimeout(() => {
+                            up(field);
+                        }, 200);
+
                     },
                     // 删除
                     del:function(k){
@@ -289,9 +229,75 @@ return oFile;
                     }
                 },
             })
+
+            function up(field) {
+//0.初始化fileinput
+
+var oFileInput = new FileInput();
+oFileInput.Init(field.id, "/component/oss?");
+
+ function FileInput() {
+    console.log(field);
+    var oFile = new Object();
+
+    //初始化fileinput控件（第一次初始化）
+    oFile.Init = function (ctrlName, uploadUrl) {
+
+        var controls = $('#' + ctrlName);
+
+        //初始化上传控件的样式
+        controls.fileinput({
+            language: 'zh', //设置语言
+            uploadUrl: uploadUrl, //上传的地址
+            allowedFileExtensions: ['jpg', 'gif', 'png','mp4'],//接收的文件后缀
+            //showUploadedThumbs:false,
+            // uploadClass: 'hidden',
+            showUpload: false, //是否显示上传按钮
+            // showCaption: false,//是否显示标题
+            browseClass: "btn btn-info", //按钮样式
+            dropZoneEnabled: false,//是否显示拖拽区域
+
+            maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
+            maxFileCount: 1, //表示允许同时上传的最大文件个数
+            minFileCount: 1,
+            enctype: 'multipart/form-data',
+            validateInitialCount: true,
+            previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
+            msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
+
+        });
+
+
+        //导入文件上传完成之后的事件
+        $("#"+ctrlName).on("fileuploaded", function (event, data, previewId, index) {
+            console.log(data.response.message)
+            mes = data.response.message;
+            field.path = mes;
+            // return;
+
+            // alert(data.response.code);
+            // $("#divControl").hide();
+        });
+
+
+
+        $("#"+ctrlName).on('fileerror', function(event, data, msg) {
+
+            console.log(data)
+
+        });
+    }
+    // console.log(field.id)
+    return oFile;
+    };
+
+
+
+};
+
         </script>
 
-            <script>
+            {{-- <script>
             function upload(){
 
 
@@ -322,5 +328,5 @@ return oFile;
                     })
                 });
             }
-            </script>
+            </script> --}}
 @endsection

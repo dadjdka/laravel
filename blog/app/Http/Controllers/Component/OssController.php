@@ -22,16 +22,18 @@ class OssController extends Controller
    public function sign(Request $request)
    {
 
-       $vid = $request->file('vid');
+       $vid = $request->file('file_data');
         // dd($vid->getClientOriginalExtension());
         // dd($vid->getRealPath());
+        // dd($vid->getClientOriginalName());
     //    $id = 'LTAI4FgLj2Cfe75q61BEeAbW';
     //    $key = 'bGpvpAcHuu0QzpG2k6xHm1CiRU7Swg';
     //    $host = 'http://laravel6-video.oss-cn-beijing.aliyuncs.com';
 
-       $dir = "video";
+       $dir = "video/";
 
-    // dd($vid->getRealPath());
+
+    // dd($vid->getClientOriginalName());
 
         // 阿里云主账号AccessKey拥有所有API的访问权限，风险很高。强烈建议您创建并使用RAM账号进行API访问或日常运维，请登录 https://ram.console.aliyun.com 创建RAM账号。
         $accessKeyId = "LTAI4FgLj2Cfe75q61BEeAbW";
@@ -41,21 +43,30 @@ class OssController extends Controller
         // 存储空间名称
         $bucket= "laravel6-video";
         // 文件名称
-        $object = 'Cache__1dc5f74ff74f589..jpg';
+           $now = time();
+        $object = $dir.$now.$vid->getClientOriginalName();
         // <yourLocalFile>由本地文件路径加文件名包括后缀组成，例如/users/local/myfile.txt
-        $filePath = "/Users/25470/Pictures/".$object;
+        // $filePath = "/Users/25470/Pictures/".$object;
 
         // $config = array($accessKeyId,$accessKeySecret,$endpoint);
 
+        $re = [];
         try{
             $ossClient = new OssClient($accessKeyId,$accessKeySecret,$endpoint);
             $ossClient->uploadFile($bucket, $object, $vid->getRealPath());
         } catch(OssException $e) {
-            printf(__FUNCTION__ . ": FAILED\n");
-            printf($e->getMessage() . "\n");
-            return;
+            // printf(__FUNCTION__ . ": FAILED\n");
+            // printf($e->getMessage() . "\n");
+            $re['vaide'] = 0;
+            $re['message'] = $e->getMessage();
+            return json_encode($re);
+
         }
-        print(__FUNCTION__ . ": OK" . "\n");
+        // print(__FUNCTION__ . ": OK" . "\n");
+
+        $re['vaide'] = 1;
+        $re['message'] = 'http://'.$bucket.'.oss-cn-beijing.aliyuncs.com/'.$object;
+        return json_encode($re);
 
 
 
@@ -65,19 +76,16 @@ class OssController extends Controller
 
 
 
+       function gmt_iso8601($time)
+       {
+            $dtStr = date("c",$time);
+            $mydatetime = new \DateTime($dtStr);
+            $expiration = $mydatetime->format(\DateTime::ISO8601);
+            $pos = strpos($expiration, '+');
+            $expiration = substr($expiration,0,$pos);
 
-
-
-    //    function gmt_iso8601($time)
-    //    {
-    //         $dtStr = date("c",$time);
-    //         $mydatetime = new \DateTime($dtStr);
-    //         $expiration = $mydatetime->format(\DateTime::ISO8601);
-    //         $pos = strpos($expiration, '+');
-    //         $expiration = substr($expiration,0,$pos);
-
-    //         return $expiration."z";
-    //    }
+            return $expiration."z";
+       }
 
     //    $now = time();
     //    $expire = 30; //policy 超时时间
