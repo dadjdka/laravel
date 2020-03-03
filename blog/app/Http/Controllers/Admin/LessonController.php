@@ -48,7 +48,11 @@ class LessonController extends Controller
         $videos = json_decode($request['videos'],true);
 
         foreach($videos as $video){
-            $leseson->videos()->create($video);
+            $leseson->videos()->create([
+                "title" => $video['title'],
+                "path" => $video['path'],
+                ]
+            );
         }
 
         return redirect('/admin/lesson');

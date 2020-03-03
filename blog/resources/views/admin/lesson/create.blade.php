@@ -170,7 +170,7 @@ $(function () {
                                     <div class="input-group">
                                         <input type="text" class="form-control" v-model="v.path">
                                         <span class="input-group-btn">
-                                            <input type="file" class="form-control"  :id="v.id">
+                                            <input type="file" class="form-control"  :id="v.id" accept="mp4,avi,dat,3gp,mov,rmvb">
                                             {{-- <button class="btn btn-defaul" type="button" >上传</button> --}}
                                         </span>
                                     </div>
@@ -234,7 +234,7 @@ $(function () {
 //0.初始化fileinput
 
 var oFileInput = new FileInput();
-oFileInput.Init(field.id, "/component/oss?");
+oFileInput.Init(field.id, "/component/oss");
 
  function FileInput() {
     console.log(field);
