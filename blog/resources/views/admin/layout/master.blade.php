@@ -8,12 +8,12 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
         <meta http-equiv="Cache-Control" content="no-siteapp" />
-        <link rel="stylesheet" href="../css/font.css">
-        <link rel="stylesheet" href="../css/xadmin.css">
+        <link rel="stylesheet" href="/css/font.css">
+        <link rel="stylesheet" href="/css/xadmin.css">
         <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
-        <script type="text/javascript" src="../js/jquery.min.js"></script>
-        <script src="../lib/layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="../js/xadmin.js"></script>
+        <script type="text/javascript" src="/js/jquery.min.js"></script>
+        <script src="/lib/layui/layui.js" charset="utf-8"></script>
+        <script type="text/javascript" src="/js/xadmin.js"></script>
 
         <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/js/fileinput.min.js"></script>
         <script type="text/javascript" src="https://cdn.bootcss.com/bootstrap-fileinput/4.4.2/js/locales/zh.js"></script>
@@ -42,7 +42,7 @@
         <!-- 顶部开始 -->
         <div class="container" style="width:100%">
             <div class="logo">
-                <a href="./index.html">X-admin v2.2</a></div>
+                <a href="../index.html">X-admin v2.2</a></div>
             <div class="left_open">
                 <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
             </div>
@@ -158,12 +158,12 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a href="./tag">
+                                <a href="../tag">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>内容标签</cite></a>
                             </li>
                             <li>
-                                <a href="./lesson">
+                                <a href="../lesson">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>视频管理</cite></a>
                             </li>

@@ -4,9 +4,10 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\Lesson;
+use App\Model\Video;
 use Illuminate\Http\Request;
 
-class LessonController extends Controller
+class LessonController extends CommController
 {
     /**
      * Display a listing of the resource.
@@ -77,7 +78,10 @@ class LessonController extends Controller
      */
     public function edit($id)
     {
-        //
+        $lesson = Lesson::find($id);
+        $videos = json_encode($lesson->Videos()->get()->toArray(),JSON_UNESCAPED_UNICODE);
+        // dd($videos);
+        return view('admin.lesson.edit',compact('lesson','videos'));
     }
 
     /**
@@ -89,7 +93,26 @@ class LessonController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $leseson = Lesson::find($id);
+        $leseson['title'] = $request['title'];
+        $leseson['introduce'] = $request['introduce'];
+        $leseson['preview'] = $request['preview'];
+        $leseson['iscommend'] = $request['iscommend'];
+        $leseson['ishot'] = $request['ishot'];
+        $leseson['click'] = $request['click'];
+        $leseson->save();
+        Video::where('lesson_id',$id)->delete();
+        $videos = json_decode($request['videos'],true);
+
+        foreach($videos as $video){
+            $leseson->videos()->create([
+                "title" => $video['title'],
+                "path" => $video['path'],
+                ]
+            );
+        }
+
+        return redirect('/admin/lesson');
     }
 
     /**
@@ -100,6 +123,8 @@ class LessonController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Lesson::destroy($id);
+        Video::where('lesson_id',$id)->delete();
+        return $this->success("删除成功");
     }
 }

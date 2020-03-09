@@ -11,11 +11,12 @@
 
 
         <ul class="nav nav-tabs" role="tablist">
-            <li><a href="../lesson">课程列表</a></li>
+            <li><a href="/admin/lesson">课程列表</a></li>
             <li class="active"><a href="../lesson/create">新增课程</a></li>
         </ul>
-        <form method="post" class="form-horzontal" action="../lesson" role="form" enctype ="multipart / form-data">
+        <form method="post" class="form-horzontal" action="../{{$lesson['id']}}" role="form" enctype ="multipart / form-data">
             {{csrf_field()}}
+            {{ method_field('PUT') }}
             <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class="panel-title">课程管理</h3>
@@ -26,21 +27,23 @@
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">课程</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="title"  required>
+                            <input type="text" class="form-control" name="title"  required value="{{$lesson['title']}}">
                         </div>
 
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">介绍</label>
                         <div class="col-sm-10">
-                            <textarea name="introduce" class="form-control" rows="5" required></textarea>
+                            <textarea name="introduce" class="form-control" rows="5" required >{{$lesson['introduce']}}</textarea>
                         </div>
 
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">预览图</label>
                         <div class="col-sm-10">
-                            <input id="preview" type="file" name="preview"  class="form-control" data-min-file-count="1" required >
+                            <input id="previews" type="text" name="preview"  class="form-control" data-min-file-count="1" required value="{{$lesson['preview']}}">
+
+                            <input id="preview" type="file"   class="form-control" data-min-file-count="1" required >
                             {{-- <input type="text" class="form-control" name="preview"  required value="no.jpg"> --}}
                         </div>
 
@@ -90,8 +93,9 @@ $(function () {
 
             //导入文件上传完成之后的事件
             $("#preview").on("fileuploaded", function (event, data, previewId, index) {
-                console.log('455')
-                alert(data.response.code);
+                $('#previews').val();
+                console.log(data)
+                // alert(data.response.code);
                 // $("#divControl").hide();
             });
 
@@ -113,10 +117,10 @@ $(function () {
                         <label for="" class="col-sm-2 control-label">推荐</label>
                         <div class="col-sm-10">
                             <label class="radio-inline">
-                                <input type="radio"  name="iscommend"  value="1">是
+                                <input type="radio"  name="iscommend"  value="1" {{$lesson['iscommend'] == 1 ? 'checked' : ''}}>是
                             </label>
                             <label class="radio-inline">
-                                <input type="radio"  name="iscommend" value="0" checked>否
+                                <input type="radio"  name="iscommend" value="0"  {{$lesson['iscommend'] == 0 ? 'checked' : ''}}>否
                             </label>
                         </div>
 
@@ -127,10 +131,10 @@ $(function () {
                         <label for="" class="col-sm-2 control-label">热门</label>
                         <div class="col-sm-10">
                             <label class="radio-inline">
-                                <input type="radio" name="ishot"  value="1">是
+                                <input type="radio" name="ishot"  value="1" {{$lesson['ishot'] == 1 ? 'checked' : ''}}>是
                             </label>
                             <label class="radio-inline">
-                                <input type="radio" name="ishot" value="0" checked>否
+                                <input type="radio" name="ishot" value="0" {{$lesson['ishot'] == 0 ? 'checked' : ''}}>否
                             </label>
                         </div>
 
@@ -140,7 +144,7 @@ $(function () {
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">点击数</label>
                         <div class="col-sm-10">
-                            <input type="text" class="form-control" name="click"  required value="0">
+                        <input type="text" class="form-control" name="click"  required value="0" value="{{$lesson['cilck']}}">
                         </div>
 
                     </div>
@@ -189,7 +193,7 @@ $(function () {
                 <div class="panel-footer">
                     <button class="btn btn-default" @click.prevent="add">添加视频</button>
                 </div>
-                <textarea name="videos"  >@{{videos}}</textarea>
+                <textarea name="videos" hidden >@{{videos}}</textarea>
             </div>
 
 
@@ -211,7 +215,12 @@ $(function () {
             new Vue({
                 el:"#app",
                 data:{
-                    videos:[]
+                    videos:JSON.parse('{!! $videos !!}')
+                },
+                mounted:function(){
+                    this.videos.forEach(v => {
+                        up(v);
+                    });
                 },
                 methods:{
                     // 添加

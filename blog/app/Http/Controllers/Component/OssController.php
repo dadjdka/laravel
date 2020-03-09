@@ -1,15 +1,9 @@
 <?php
 
 namespace App\Http\Controllers\Component;
-if (is_file(__DIR__ . '/../autoload.php')) {
-    require_once __DIR__ . '/../autoload.php';
-}
-if (is_file(__DIR__ . '/../vendor/autoload.php')) {
-    require_once __DIR__ . '/../vendor/autoload.php';
-}
+
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use OSS\Core\OssException as CoreOssException;
 // use App\Services\OSS;
 // use Aliyun\OSS\OSSClient;
 use OSS\OssClient;
@@ -22,6 +16,7 @@ class OssController extends Controller
    public function sign(Request $request)
    {
 
+
        $vid = $request->file('file_data');
         // dd($vid->getClientOriginalExtension());
         // dd($vid->getRealPath());
@@ -30,9 +25,9 @@ class OssController extends Controller
     //    $key = 'bGpvpAcHuu0QzpG2k6xHm1CiRU7Swg';
     //    $host = 'http://laravel6-video.oss-cn-beijing.aliyuncs.com';
 
+
        $dir = "video/";
 
-       dd($vid);
 
     // dd($vid->getClientOriginalName());
 
