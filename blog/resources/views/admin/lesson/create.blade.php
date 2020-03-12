@@ -11,8 +11,8 @@
 
 
         <ul class="nav nav-tabs" role="tablist">
-            <li><a href="../lesson">课程列表</a></li>
-            <li class="active"><a href="../lesson/create">新增课程</a></li>
+            <li><a href="/laravel/blog/public/admin/lesson">课程列表</a></li>
+            <li class="active"><a href="/lesson/create">新增课程</a></li>
         </ul>
         <form method="post" class="form-horzontal" action="../lesson" role="form" enctype ="multipart / form-data">
             {{csrf_field()}}
@@ -170,7 +170,7 @@ $(function () {
                                     <div class="input-group">
                                         <input type="text" class="form-control" v-model="v.path">
                                         <span class="input-group-btn">
-                                            <input type="file" class="form-control"  :id="v.id" >
+                                            <input type="file" class="form-control"  :id="v.id">
                                             {{-- <button class="btn btn-defaul" type="button" >上传</button> --}}
                                         </span>
                                     </div>
@@ -249,18 +249,15 @@ oFileInput.Init(field.id, "/component/oss?");
         controls.fileinput({
             language: 'zh', //设置语言
             uploadUrl: uploadUrl, //上传的地址
-            allowedFileExtensions: [],//接收的文件后缀
-            uploadAsync: true, //默认异步上传
-            // showUploadedThumbs:false,
+            allowedFileExtensions: ['jpg', 'gif', 'png','mp4'],//接收的文件后缀
+            //showUploadedThumbs:false,
             // uploadClass: 'hidden',
             showUpload: false, //是否显示上传按钮
             // showCaption: false,//是否显示标题
             browseClass: "btn btn-info", //按钮样式
             dropZoneEnabled: false,//是否显示拖拽区域
-            // showPreview: false,
-            // showCancel: false,
 
-            maxFileSize: 512000,//单位为kb，如果为0表示不限制文件大小
+            maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
             maxFileCount: 1, //表示允许同时上传的最大文件个数
             minFileCount: 1,
             enctype: 'multipart/form-data',
@@ -282,16 +279,11 @@ oFileInput.Init(field.id, "/component/oss?");
             // $("#divControl").hide();
         });
 
-        $("#"+ctrlName).on('filebatchselected', function(event, files) {
-            // 选中事件
-            console.log(event)
-            console.log(files)
-            $(event.target).fileinput('upload')
-          })
+
 
         $("#"+ctrlName).on('fileerror', function(event, data, msg) {
 
-            console.log("错误")
+            console.log(data)
 
         });
     }
