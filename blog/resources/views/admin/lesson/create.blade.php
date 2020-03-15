@@ -11,7 +11,7 @@
 
 
         <ul class="nav nav-tabs" role="tablist">
-            <li><a href="/laravel/blog/public/admin/lesson">课程列表</a></li>
+            <li><a href="/admin/lesson">课程列表</a></li>
             <li class="active"><a href="/lesson/create">新增课程</a></li>
         </ul>
         <form method="post" class="form-horzontal" action="../lesson" role="form" enctype ="multipart / form-data">

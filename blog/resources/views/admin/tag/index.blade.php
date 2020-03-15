@@ -2,7 +2,7 @@
 @section('content')
         <ul class="nav nav-tabs" role="tablist">
             <li class="active"><a href="">标签列表</a></li>
-            <li><a href="../tag/create">新增标签</a></li>
+            <li><a href="/admin/tag/create">新增标签</a></li>
         </ul>
         <form method="post" class="form-horzontal" action="changPassword" role="form">
             {{csrf_field()}}

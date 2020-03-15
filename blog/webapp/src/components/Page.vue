@@ -56,6 +56,7 @@ export default {
 a {
 	text-decoration: none;
 	color: #31343B;
+
 }
 
 li {

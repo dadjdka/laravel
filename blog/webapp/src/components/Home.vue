@@ -1,22 +1,23 @@
 <template>
   <div>
-
 <!--轮播图-->
-  <div class="swiper-container">
-    <div class="swiper-wrapper">
-      <div class="swiper-slide">
-        <a href=""><img src="static/static/images/1.jpg"/></a>
-      </div>
-      <div class="swiper-slide">
-        <a href=""><img src="static/static/images/2.jpg"/></a>
-      </div>
-      <div class="swiper-slide">
-        <a href=""><img src="static/static/images/3.jpg"/></a>
-      </div>
-    </div>
-    <!-- 如果需要分页器 -->
-    <div class="swiper-pagination"></div>
-  </div>
+     <swiper :options="swiperOption" ref="mySwiper" >
+    <!-- slides -->
+    <swiper-slide v-for="(v,key) in slides" :key="v.id">
+        <router-link to="/video">
+         <img :src="v.path" alt="" srcset="" />
+        </router-link>
+      </swiper-slide>
+    <!-- Optional controls -->
+    <div class="swiper-pagination"  slot="pagination"></div>
+    <div class="swiper-button-prev" slot="button-prev"></div>
+    <div class="swiper-button-next" slot="button-next"></div>
+    <div class="swiper-scrollbar"   slot="scrollbar"></div>
+  </swiper>
+
+
+
+
   <!--轮播图结束-->
 
   <!--推荐视频-->
@@ -59,11 +60,10 @@
 
 
 
-  <!--今日推荐-->
-  <h2>今日推荐</h2>
+  <!--热门视频推荐-->
+  <h2>热门视频推荐</h2>
 
   <div class="today">
-    <a href="" class="title">大数据下的广告：精准投放与精准消除</a>
     <p class="column">网络资讯</p>
     <div class="pic">
       <a href=""><img src="static/images/15.jpg"/></a>
@@ -113,9 +113,43 @@ export default {
   name: 'home',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      slides: [{id: 1, path : 'static/images/1.jpg'},
+              {id: 2, path : 'static/images/2.jpg'},
+              {id: 3, path : 'static/images/3.jpg'}
+      ],
+       swiperOption: {
+          //是一个组件自有属性，如果notNextTick设置为true，组件则不会通过NextTick来实例化swiper，也就意味着你可以在第一时间获取到swiper对象，假如你需要刚加载遍使用获取swiper对象来做什么事，那么这个属性一定要是true
+          notNextTick: true,
+          //循环
+          loop: true,
+          //设定初始化时slide的索引
+          initialSlide: 0,
+          //自动播放
+          autoplay: 3000,
+          //滑动速度
+          speed: 800,
+          //滑动方向
+          direction: "horizontal",
+          //小手掌抓取滑动
+          grabCursor: true,
+          setWrapperSize: true,
+          autoHeight:true,
+          pagination: '.swiper-pagination',
+          paginationClickable:true,
+          prevButtion: ".swiper-button-prev",
+          prevButtion: ".swiper-button-next",
+          scrollbar: ".swiper-scrollbar",
+          mousewheelControl: true,
+          observeParents: true,
+        }
     }
-  }
+  },
+   computed: {
+      swiper() {
+        return this.$refs.mySwiper.swiper
+      }
+    },
+
 }
 </script>
 
@@ -150,10 +184,11 @@ body {
 	width: 100%;
 	height: 100%;
 	position: relative;
-	overflow: hidden;
+	/* overflow: hidden; */
 }
 .swiper-container .swiper-slide img{
-	height: 100%;
+	height: 200px;
+  width: 100%;
 	position: absolute;
 	left: 50%;
 	top: 0;

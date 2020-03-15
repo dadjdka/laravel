@@ -1,7 +1,17 @@
 <template>
   <div>
+
+    <swiper :options="swiperOption">
+        <swiper-slide v-for="v in tag" :key="v.id">
+         <router-link to="/video">
+            {{v.title}}
+         </router-link>
+        </swiper-slide>
+
+
+      </swiper>
     	<!--导航条-->
-		<div class="swiper-container">
+		<!-- <div class="swiper-container">
 			<div class="swiper-wrapper">
 				<a href="" class="swiper-slide cur">静态布局</a>
 				<a href="" class="swiper-slide">JavaScript</a>
@@ -12,7 +22,7 @@
 				<a href="" class="swiper-slide">PHP</a>
 				<a href="" class="swiper-slide">MySQL</a>
 			</div>
-		</div>
+		</div> -->
 		<!--导航条结束-->
 
 		<!--视频列表-->
@@ -164,6 +174,26 @@
 <script>
 export default {
   name: 'Video',
+  data(){
+    return {
+        tag:[
+          {id: 1,title: "PHP"},
+          {id: 2,title: "HTML"},
+          {id: 3,title: "GO"},
+          {id: 4,title: "Java"},
+          {id: 5,title: "MYSQL"},
+        ],
+        swiperOption: {
+          slidesPerView: 3,
+          spaceBetween: 30,
+          freeMode: true,
+          pagination: {
+            el: '.swiper-pagination',
+            clickable: true
+          }
+        }
+    }
+  }
 
 }
 </script>
@@ -177,7 +207,7 @@ export default {
 
 a {
 	text-decoration: none;
-	color: #31343B;
+	color:white;
 }
 
 li {
