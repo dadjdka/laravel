@@ -7,30 +7,7 @@
 		<h1>10 导航条样式的设置</h1>
 
 		<ul id="list">
-			<li><a href="">07 w3c规范 创建网页的方法</a></li>
-			<li class="cur"><a href="">08 a标签 img标签详解</a></li>
-			<li><a href="">09 代码注释</a></li>
-			<li><a href="">07 w3c规范 创建网页的方法</a></li>
-			<li><a href="">08 a标签 img标签详解</a></li>
-			<li><a href="">09 代码注释</a></li>
-			<li><a href="">07 w3c规范 创建网页的方法</a></li>
-			<li><a href="">08 a标签 img标签详解</a></li>
-			<li><a href="">09 代码注释</a></li>
-			<li><a href="">08 a标签 img标签详解</a></li>
-			<li><a href="">09 代码注释</a></li>
-			<li><a href="">07 w3c规范 创建网页的方法</a></li>
-			<li><a href="">08 a标签 img标签详解</a></li>
-			<li><a href="">09 代码注释</a></li>
-			<li><a href="">08 a标签 img标签详解</a></li>
-			<li><a href="">09 代码注释</a></li>
-			<li><a href="">07 w3c规范 创建网页的方法</a></li>
-			<li><a href="">08 a标签 img标签详解</a></li>
-			<li><a href="">09 代码注释</a></li>
-			<li><a href="">08 a标签 img标签详解</a></li>
-			<li><a href="">09 代码注释</a></li>
-			<li><a href="">07 w3c规范 创建网页的方法</a></li>
-			<li><a href="">08 a标签 img标签详解</a></li>
-			<li><a href="">09 代码注释</a></li>
+			<li v-for="v in videos" :key="v.id"><router-link :to="v.path">{{v.title}}</router-link></li>
 		</ul>
 
 
@@ -42,6 +19,25 @@
 <script>
 export default {
   name: 'Page',
+  mounted(){
+    let lessonId = this.$route.params.lessonId;
+
+
+    this.axios.get("http://www.laravel.ios/api/videos/"+lessonId).then((response) => {
+
+            if(response.status != 200 && response.data.code != 200){
+                alert("请稍后再试");
+            }else{
+               this.videos = response.data.data;
+            }
+        })
+
+  },
+  data(){
+    return{
+      videos:[]
+    }
+  }
 
 }
 </script>

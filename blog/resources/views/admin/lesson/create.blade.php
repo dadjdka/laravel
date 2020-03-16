@@ -40,7 +40,8 @@
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">预览图</label>
                         <div class="col-sm-10">
-                            <input id="preview" type="file" name="preview"  class="form-control" data-min-file-count="1" required >
+                            <input id="preview" type="text" name="preview"  class="form-control" required >
+                            <input id="previewa" type="file" name="previewa"  class="form-control" data-min-file-count="1" >
                             {{-- <input type="text" class="form-control" name="preview"  required value="no.jpg"> --}}
                         </div>
 
@@ -48,7 +49,7 @@
 $(function () {
         //0.初始化fileinput
         var oFileInput = new FileInput();
-        oFileInput.Init("preview", "/component/uploader");
+        oFileInput.Init("previewa", "/component/uploader");
     });
     var FileInput = function () {
         var oFile = new Object();
@@ -89,15 +90,15 @@ $(function () {
 
 
             //导入文件上传完成之后的事件
-            $("#preview").on("fileuploaded", function (event, data, previewId, index) {
-                console.log('455')
-                alert(data.response.code);
-                // $("#divControl").hide();
+            $("#previewa").on("fileuploaded", function (event, data, previewId, index) {
+                console.log(data)
+                // alert(data.response.code);
+                $("#preview").val(data.response.message);
             });
 
 
 
-            $('#preview').on('fileerror', function(event, data, msg) {
+            $('#previewa').on('fileerror', function(event, data, msg) {
 
                 console.log(data)
 
@@ -189,7 +190,7 @@ $(function () {
                 <div class="panel-footer">
                     <button class="btn btn-default" @click.prevent="add">添加视频</button>
                 </div>
-                <textarea name="videos"  >@{{videos}}</textarea>
+                <textarea name="videos" hidden >@{{videos}}</textarea>
             </div>
 
 

@@ -24,30 +24,13 @@
   <h2>推荐视频</h2>
 
   <div id="recommend">
-    <a href="">
-      <img src="static/static/images/4.jpg" alt="" />
+     <router-link :to="{params:{lessonId:vs.id},name:'Page'}" v-for="vs in commendLesson" :key="vs.id">
+      <img :src="vs.preview"  />
       <i class="iconfont icon-bofang"></i>
       <span class="time">22:56</span>
-      <span class="title">谷歌：没有扫描仪也能</span>
-    </a>
-    <a href="">
-      <img src="static/static/images/5.jpg" alt="" />
-      <i class="iconfont icon-bofang"></i>
-      <span class="time">22:56</span>
-      <span class="title">谷歌：没有扫描仪也能</span>
-    </a>
-    <a href="">
-      <img src="static/images/6.jpg" alt="" />
-      <i class="iconfont icon-bofang"></i>
-      <span class="time">22:56</span>
-      <span class="title">谷歌：没有扫描仪也能</span>
-    </a>
-    <a href="">
-      <img src="static/images/7.jpg" alt="" />
-      <i class="iconfont icon-bofang"></i>
-      <span class="time">22:56</span>
-      <span class="title">谷歌：没有扫描仪也能</span>
-    </a>
+      <span class="title">{{vs.title}}</span>
+     </router-link>
+
   </div>
   <!--推荐视频结束-->
 
@@ -66,9 +49,10 @@
   <div class="today">
     <p class="column">网络资讯</p>
     <div class="pic">
-      <a href=""><img src="static/images/15.jpg"/></a>
-      <a href=""><img src="static/images/11.jpg"/></a>
-      <a href=""><img src="static/images/10.jpg"/></a>
+     <router-link :to="{params:{lessonId:v.id},name:'Page'}" v-for="v in hotLesson" :key="v.id">
+    	<img :src="v.preview"/>
+     </router-link>
+
     </div>
   </div>
   <!--今日推荐结束-->
@@ -102,6 +86,7 @@
         <span>视频</span>
       </router-link>
     </li>
+
   </ul>
   <!--底部固定导航结束-->
 
@@ -111,8 +96,23 @@
 <script>
 export default {
   name: 'home',
+  mounted (){
+
+    this.axios.get("http://www.laravel.ios/api/commendLesson/4").then((response) => {
+        this.commendLesson = response.data.data;
+
+    })
+
+    this.axios.get("http://www.laravel.ios/api/hotLesson/3").then((response) => {
+        this.hotLesson = response.data.data;
+
+    })
+
+  },
   data () {
     return {
+      commendLesson: [],
+      hotLesson: [],
       slides: [{id: 1, path : 'static/images/1.jpg'},
               {id: 2, path : 'static/images/2.jpg'},
               {id: 3, path : 'static/images/3.jpg'}
@@ -144,11 +144,6 @@ export default {
         }
     }
   },
-   computed: {
-      swiper() {
-        return this.$refs.mySwiper.swiper
-      }
-    },
 
 }
 </script>

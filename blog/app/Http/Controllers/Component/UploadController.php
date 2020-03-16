@@ -11,7 +11,7 @@ class UploadController extends Controller
     {
 
 
-        $upload = $request->file('preview');
+        $upload = $request->file('previewa');
 
 
         // dd($upload);
