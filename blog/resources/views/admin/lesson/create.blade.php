@@ -41,7 +41,7 @@
                         <label for="" class="col-sm-2 control-label">预览图</label>
                         <div class="col-sm-10">
                             <input id="preview" type="text" name="preview"  class="form-control" required >
-                            <input id="previewa" type="file" name="previewa"  class="form-control" data-min-file-count="1" >
+                            <input id="previewa" type="file"   class="form-control" data-min-file-count="1" >
                             {{-- <input type="text" class="form-control" name="preview"  required value="no.jpg"> --}}
                         </div>
 
