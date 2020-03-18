@@ -2,9 +2,9 @@
   <div>
 
     <swiper :options="swiperOption">
-        <swiper-slide v-for="v in tag" :key="v.id">
-         <router-link to="/video">
-            {{v.title}}
+        <swiper-slide v-for="v in tags" :key="v.id">
+         <router-link :to="{params:{tid:v.id},name:'Video'}">
+            {{v.name}}
          </router-link>
         </swiper-slide>
 
@@ -174,15 +174,26 @@
 <script>
 export default {
   name: 'Video',
+   mounted(){
+    let tid = this.$route.params.tid;
+    tid = tid ? tid : 0;
+
+    this.axios.get("http://www.laravel.ios/api/lesson/"+tid).then((response) => {
+
+               this.lesson = response.data.data;
+
+        })
+    this.axios.get("http://www.laravel.ios/api/tags").then((response) => {
+
+               this.tags = response.data.data;
+
+        })
+
+  },
   data(){
     return {
-        tag:[
-          {id: 1,title: "PHP"},
-          {id: 2,title: "HTML"},
-          {id: 3,title: "GO"},
-          {id: 4,title: "Java"},
-          {id: 5,title: "MYSQL"},
-        ],
+        tags:[],
+        lesson:[],
         swiperOption: {
           slidesPerView: 3,
           spaceBetween: 30,
