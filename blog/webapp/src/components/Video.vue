@@ -27,125 +27,21 @@
 
 		<!--视频列表-->
 		<ul id="videolist">
-			<li>
-				<router-link to="page" class="pic">
-					<img src="static/images/5.jpg"/>
+
+			<li v-for="v in lesson" :key="v.id">
+
+        <router-link  class="pic" :to="{params:{leesonId:v.id},name:'Page'}">
+					<img :src="v.preview"/>
 					<span>08:26</span>
 					<i class="iconfont icon-bofang"></i>
-				</router-link>
-				<a href="" class="title">精准投放与精准消除</a>
-			</li>
-			<li>
-				<a href="" class="pic">
-					<img src="static/images/17.jpg"/>
-					<span>08:26</span>
-					<i class="iconfont icon-bofang"></i>
-				</a>
-				<a href="" class="title">精准投放与精准消除</a>
-			</li>
-			<li>
-				<a href="" class="pic">
-					<img src="static/images/18.jpg"/>
-					<span>08:26</span>
-					<i class="iconfont icon-bofang"></i>
-				</a>
-				<a href="" class="title">精准投放与精准消除</a>
-			</li>
-			<li>
-				<a href="" class="pic">
-					<img src="static/images/19.jpg"/>
-					<span>08:26</span>
-					<i class="iconfont icon-bofang"></i>
-				</a>
-				<a href="" class="title">精准投放与精准消除</a>
-			</li>
-			<li>
-				<a href="" class="pic">
-					<img src="static/images/20.jpg"/>
-					<span>08:26</span>
-					<i class="iconfont icon-bofang"></i>
-				</a>
-				<a href="" class="title">精准投放与精准消除</a>
-			</li>
-			<li>
-				<a href="" class="pic">
-					<img src="static/images/21.jpg"/>
-					<span>08:26</span>
-					<i class="iconfont icon-bofang"></i>
-				</a>
-				<a href="" class="title">精准投放与精准消除</a>
-			</li>
-			<li>
-				<a href="" class="pic">
-					<img src="static/images/22.jpg"/>
-					<span>08:26</span>
-					<i class="iconfont icon-bofang"></i>
-				</a>
-				<a href="" class="title">精准投放与精准消除</a>
-			</li>
-			<li>
-				<a href="" class="pic">
-					<img src="static/images/23.jpg"/>
-					<span>08:26</span>
-					<i class="iconfont icon-bofang"></i>
-				</a>
-				<a href="" class="title">精准投放与精准消除</a>
-			</li>
-			<li>
-				<a href="" class="pic">
-					<img src="static/images/17.jpg"/>
-					<span>08:26</span>
-					<i class="iconfont icon-bofang"></i>
-				</a>
-				<a href="" class="title">精准投放与精准消除</a>
-			</li>
-			<li>
-				<a href="" class="pic">
-					<img src="static/images/18.jpg"/>
-					<span>08:26</span>
-					<i class="iconfont icon-bofang"></i>
-				</a>
-				<a href="" class="title">精准投放与精准消除</a>
-			</li>
-			<li>
-				<a href="" class="pic">
-					<img src="static/images/19.jpg"/>
-					<span>08:26</span>
-					<i class="iconfont icon-bofang"></i>
-				</a>
-				<a href="" class="title">精准投放与精准消除</a>
-			</li>
-			<li>
-				<a href="" class="pic">
-					<img src="static/images/20.jpg"/>
-					<span>08:26</span>
-					<i class="iconfont icon-bofang"></i>
-				</a>
-				<a href="" class="title">精准投放与精准消除</a>
-			</li>
-			<li>
-				<a href="" class="pic">
-					<img src="static/images/21.jpg"/>
-					<span>08:26</span>
-					<i class="iconfont icon-bofang"></i>
-				</a>
-				<a href="" class="title">精准投放与精准消除</a>
-			</li>
-			<li>
-				<a href="" class="pic">
-					<img src="static/images/22.jpg"/>
-					<span>08:26</span>
-					<i class="iconfont icon-bofang"></i>
-				</a>
-				<a href="" class="title">精准投放与精准消除</a>
-			</li>
-			<li>
-				<a href="" class="pic">
-					<img src="static/images/23.jpg"/>
-					<span>08:26</span>
-					<i class="iconfont icon-bofang"></i>
-				</a>
-				<a href="" class="title">精准投放与精准消除</a>
+
+	      </router-link>
+
+        <router-link  class="title" :to="{params:{leesonId:v.id},name:'Page'}">
+          {{v.title}}
+        </router-link>
+
+
 			</li>
 
 		</ul>
@@ -174,20 +70,15 @@
 <script>
 export default {
   name: 'Video',
+  watch:{
+    '$route'(to,from){
+      this.loadData();
+
+    }
+  },
    mounted(){
-    let tid = this.$route.params.tid;
-    tid = tid ? tid : 0;
 
-    this.axios.get("http://www.laravel.ios/api/lesson/"+tid).then((response) => {
-
-               this.lesson = response.data.data;
-
-        })
-    this.axios.get("http://www.laravel.ios/api/tags").then((response) => {
-
-               this.tags = response.data.data;
-
-        })
+     this.loadData()
 
   },
   data(){
@@ -204,7 +95,24 @@ export default {
           }
         }
     }
-  }
+  },
+  methods: {
+    loadData(){
+              let tid = this.$route.params.tid;
+              tid = tid ? tid : 0;
+
+              this.axios.get("http://www.laravel.ios/api/lesson/"+tid).then((response) => {
+
+                        this.lesson = response.data.data;
+ console.log(this.lesson)
+                  })
+              this.axios.get("http://www.laravel.ios/api/tags").then((response) => {
+
+              this.tags = response.data.data;
+
+        })
+    }
+  },
 
 }
 </script>

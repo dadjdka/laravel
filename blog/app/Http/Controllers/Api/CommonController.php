@@ -19,9 +19,11 @@ class CommonController extends Controller
         if($tid){
 
         $data = DB::table('lessons')
+            ->select('lessons.id','lessons.preview','lessons.title')
             ->join('tag_lessons', 'lessons.id', '=', 'tag_lessons.lesson_id')
             ->where('tag_id',$tid)
             ->get();
+
         }else{
             $data = Lesson::get();
         }

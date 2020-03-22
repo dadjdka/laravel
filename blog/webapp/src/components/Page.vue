@@ -20,10 +20,9 @@
 export default {
   name: 'Page',
   mounted(){
-    let lessonId = this.$route.params.lessonId;
+    var lesson = this.$route.params;
 
-
-    this.axios.get("http://www.laravel.ios/api/videos/"+lessonId).then((response) => {
+    this.axios.get("http://www.laravel.ios/api/videos/"+lesson.leesonId).then((response) => {
 
             if(response.status != 200 && response.data.code != 200){
                 alert("请稍后再试");
@@ -73,7 +72,7 @@ li {
 
 body {
 	font-family: Helvetica Neue, Helvetica, Arial, sans-serif;
-	/*padding-bottom: 15%;*/
+	padding-bottom: 15%;
 }
 
 
@@ -108,7 +107,7 @@ body {
 }
 
 #bottom li.cur {
-	/*background: #333;*/
+	background: #333;
 }
 
 #bottom li.cur i.iconfont {
@@ -134,8 +133,8 @@ h1{
 	font-weight: 700;
 }
 #list{
-	/*width: 92%;*/
-	/*margin: 0 auto;*/
+	width: 92%;
+	margin: 0 auto;
 	border-top: #EFEFF4 5px solid;
 	padding-top: 2%;
 }
