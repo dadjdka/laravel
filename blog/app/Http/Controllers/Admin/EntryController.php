@@ -5,7 +5,8 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Gregwar\Captcha\CaptchaBuilder;
+use Illuminate\Support\Facades\Session;
 
 class EntryController extends Controller
 {
@@ -13,18 +14,34 @@ class EntryController extends Controller
     public function __construct()
     {
         // ->验证器->排除验证
-        $this->middleware('admin.auth')->except(['loginForm','login']);
+        $this->middleware('admin.auth')->except(['loginForm','login','code']);
+
     }
 
     public function index()
     {
-
+        
         return view('admin.index');
+
     }
+
+   
 
     //登录视图
     public function loginForm(){
-        return view('admin.login');
+
+        $code = $this->code();
+        return view('admin.login',compact('code'));
+    }
+
+    public function code()
+    {
+        $builder = new CaptchaBuilder;
+        $builder->build();
+        $code = $builder->inline();  //获取图形验证码的url
+        session()->put('piccode', $builder->getPhrase());  //将图形验证码的值写入到session中
+     
+        return $code;
     }
 
     //登录处理
@@ -32,9 +49,21 @@ class EntryController extends Controller
     {
         //查询相应配置项
 
+        //验证码验证处理
+        $code = Session::get('piccode');
+       
+        if (strtoupper($code) != strtoupper($request->input('code'))) 
+        {
+          
+            return redirect('/admin/login')->with('error',"验证码错误");
+
+        }
+        
+
         $status = Auth::guard('admin')->attempt(['username' => $request->input('username'), 'password' => $request->input('password')]);
 
-        if ($status) {
+        if ($status) 
+        {
             return redirect('/admin/index');
         }
 

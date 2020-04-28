@@ -250,7 +250,7 @@ oFileInput.Init(field.id, "/component/oss?");
         controls.fileinput({
             language: 'zh', //设置语言
             uploadUrl: uploadUrl, //上传的地址
-            allowedFileExtensions: ['jpg', 'gif', 'png','mp4'],//接收的文件后缀
+            // allowedFileExtensions: ['jpg', 'gif', 'png','mp4'],//接收的文件后缀
             //showUploadedThumbs:false,
             // uploadClass: 'hidden',
             showUpload: false, //是否显示上传按钮

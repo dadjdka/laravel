@@ -26,6 +26,7 @@ export default {
 
             if(response.status != 200 && response.data.code != 200){
                 alert("请稍后再试");
+				return
             }else{
                this.videos = response.data.data;
                this.current = this.videos[0]

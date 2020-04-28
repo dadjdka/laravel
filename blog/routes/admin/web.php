@@ -6,7 +6,8 @@ Route::group(['prefix' => "admin",'namespace' => 'Admin'],function(){
     Route::get("/login",'EntryController@loginForm');
     //登录处理
     Route::post("/login",'EntryController@login');
-
+    //获取验证码
+    Route::get("/code",'EntryController@code');
     //后台爱登录主页
     Route::get("/index",'EntryController@index');
 

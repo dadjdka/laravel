@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="./css/font.css">
     <link rel="stylesheet" href="./css/login.css">
 	<link rel="stylesheet" href="./css/xadmin.css">
-
+    
 
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.2.1/jquery.min.js"></script>
     <script src="./lib/layui/layui.js" charset="utf-8"></script>
@@ -32,11 +32,12 @@
             <hr class="hr15">
             <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
             <hr class="hr15">
-
+            <input name="code" lay-verify="required" placeholder="验证码"  type="text" class="layui-input"><img id='code' src="{{$code}}">
+            <hr class="hr15">
             @if(session('error'))
 
 
-            {{session('error')}}
+            <span style="color: red;">{{session('error')}}</span>
             @endif
             <input value="登录" lay-submit lay-filter="login" style="width:100%;" type="submit">
             <hr class="hr20" >
@@ -44,6 +45,13 @@
     </div>
 
     <script>
+        $('#code').click(function(){
+          
+            $.get('./code?math=1',function(imgs){
+               
+                $('#code').attr('src',imgs);
+            })
+        })
         $(function  () {
             layui.use('form', function(){
               var form = layui.form;
