@@ -11,7 +11,7 @@
 |
 */
 
-
+header('Access-Control-Allow-Origin: *');
 // Route::get('/{id}', function ($id) {
 //     return $id;
 // })->where(["id" => "[0-9]+","name" => "[a-z]+"]);

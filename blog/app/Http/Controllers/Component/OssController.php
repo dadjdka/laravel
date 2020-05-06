@@ -17,6 +17,9 @@ class OssController extends Controller
    {
 
 
+
+    dd($request->file());
+
        $vid = $request->file('file_data');
         // dd($vid->getClientOriginalExtension());
         // dd($vid->getRealPath());
@@ -39,7 +42,7 @@ class OssController extends Controller
         // 存储空间名称
         $bucket= "laravel6-video";
         // 文件名称
-           $now = time();
+        $now = time();
         $object = $dir.$now.$vid->getClientOriginalName();
         // <yourLocalFile>由本地文件路径加文件名包括后缀组成，例如/users/local/myfile.txt
         // $filePath = "/Users/25470/Pictures/".$object;

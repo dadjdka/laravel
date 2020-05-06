@@ -14,7 +14,7 @@
             <li><a href="/admin/lesson">课程列表</a></li>
             <li class="active"><a href="/lesson/create">新增课程</a></li>
         </ul>
-        <form method="post" class="form-horzontal" action="../lesson" role="form" enctype ="multipart / form-data">
+        <form method="post" class="form-horzontal" action="../lesson" role="form" enctype ="multipart/form-data">
             {{csrf_field()}}
             <div class="panel panel-default">
                 <div class="panel-heading">
@@ -36,6 +36,16 @@
                             <textarea name="introduce" class="form-control" rows="5" required></textarea>
                         </div>
 
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">课程标签</label>
+                        <div class="col-sm-10">
+                            <select class="combobox" v-for="tag in v" :key="v,id">
+                                @foreach($tag as $key => $item)
+                                <option value="{{$item['id']}}">{{$item['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">预览图</label>
@@ -173,6 +183,7 @@ $(function () {
                                         <span class="input-group-btn">
                                             <input type="file" class="form-control"  :id="v.id">
                                             {{-- <button class="btn btn-defaul" type="button" >上传</button> --}}
+
                                         </span>
                                     </div>
                                 </div>
@@ -212,7 +223,8 @@ $(function () {
             new Vue({
                 el:"#app",
                 data:{
-                    videos:[]
+                    videos:[],
+                    tag: JSON.parse('{!! $tag !!}')
                 },
                 methods:{
                     // 添加
@@ -250,10 +262,11 @@ oFileInput.Init(field.id, "/component/oss?");
         controls.fileinput({
             language: 'zh', //设置语言
             uploadUrl: uploadUrl, //上传的地址
-            allowedFileExtensions: ['jpg', 'gif', 'png','mp4'],//接收的文件后缀
+            allowedFileExtensions : [ "mp4","avi","dat","3gp","mov","rmvb"],//接收的文件后缀
+
             //showUploadedThumbs:false,
             // uploadClass: 'hidden',
-            showUpload: false, //是否显示上传按钮
+            // showUpload: false, //是否显示上传按钮
             // showCaption: false,//是否显示标题
             browseClass: "btn btn-info", //按钮样式
             dropZoneEnabled: false,//是否显示拖拽区域
@@ -261,13 +274,16 @@ oFileInput.Init(field.id, "/component/oss?");
             maxFileSize: 0,//单位为kb，如果为0表示不限制文件大小
             maxFileCount: 1, //表示允许同时上传的最大文件个数
             minFileCount: 1,
-            enctype: 'multipart/form-data',
+            // enctype: 'multipart/form-data',
             validateInitialCount: true,
             previewFileIcon: "<i class='glyphicon glyphicon-king'></i>",
             msgFilesTooMany: "选择上传的文件数量({n}) 超过允许的最大数值{m}！",
 
-        });
 
+        });
+        $("#"+ctrlName).on('fileloaded', function(event, file, previewId, index, reader) {
+                console.log(reader);
+            });
 
         //导入文件上传完成之后的事件
         $("#"+ctrlName).on("fileuploaded", function (event, data, previewId, index) {

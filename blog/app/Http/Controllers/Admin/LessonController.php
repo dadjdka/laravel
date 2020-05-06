@@ -4,8 +4,11 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Model\Lesson;
+use App\Model\Tag;
+use App\Model\TagLesson;
 use App\Model\Video;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class LessonController extends CommController
 {
@@ -16,7 +19,10 @@ class LessonController extends CommController
      */
     public function index()
     {
+
         $data = Lesson::get();
+        //标签数据
+
         return view('admin.lesson.index',compact('data'));
     }
 
@@ -27,7 +33,10 @@ class LessonController extends CommController
      */
     public function create()
     {
-        return view('admin.lesson.create');
+        $tag = Tag::get();
+
+
+        return view('admin.lesson.create',compact('tag'));
     }
 
     /**
@@ -81,7 +90,10 @@ class LessonController extends CommController
         $lesson = Lesson::find($id);
         $videos = json_encode($lesson->Videos()->get()->toArray(),JSON_UNESCAPED_UNICODE);
         // dd($videos);
-        return view('admin.lesson.edit',compact('lesson','videos'));
+
+        $tag = Tag::get();
+
+        return view('admin.lesson.edit',compact('lesson','videos',"tag"));
     }
 
     /**
@@ -94,6 +106,7 @@ class LessonController extends CommController
     public function update(Request $request, $id)
     {
         $leseson = Lesson::find($id);
+
         $leseson['title'] = $request['title'];
         $leseson['introduce'] = $request['introduce'];
         $leseson['preview'] = $request['preview'];
@@ -101,6 +114,21 @@ class LessonController extends CommController
         $leseson['ishot'] = $request['ishot'];
         $leseson['click'] = $request['click'];
         $leseson->save();
+
+        $tag_lesson = TagLesson::where([['tag_id',$request['tag']],['lesson_id',$id]])->get();
+
+
+        if (count($tag_lesson) == 0){
+            $tag_lesson = TagLesson::created();
+            $tag_lesson['tag_id'] = $request['tag'];
+            $tag_lesson['lesson_id'] = $id;
+
+            $tag_lesson->save();
+        }
+
+        $tag_lesson['tag_id'] = $request['tag'];
+
+
         Video::where('lesson_id',$id)->delete();
         $videos = json_decode($request['videos'],true);
 

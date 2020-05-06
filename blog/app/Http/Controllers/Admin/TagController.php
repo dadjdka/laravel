@@ -41,6 +41,7 @@ class TagController extends CommController
      */
     public function store(TagRequest $request, Tag $model)
     {
+        Tag::create();
         $model->create($request->all());
         return redirect('./admin/tag');
     }

@@ -38,6 +38,19 @@
                         </div>
 
                     </div>
+
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">视频标签</label>
+                        <div class="col-sm-10">
+                            <select name="tag" class="form-control">
+                                @foreach ($tag as $tags)
+                                <option value="{{$tags['id']}}">{{$tags['name']}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                    </div>
+
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">预览图</label>
                         <div class="col-sm-10">
@@ -164,6 +177,7 @@ $(function () {
                             <div class="form-group">
                                 <label for="" class="col-sm-2 control-label">视频标题</label>
                                 <div class="col-sm-10">
+
                                     <input type="text" class="form-control" v-model="v.title">
                                 </div>
                             </div>
@@ -215,9 +229,11 @@ $(function () {
             new Vue({
                 el:"#app",
                 data:{
-                    videos:JSON.parse('{!! $videos !!}')
+                    videos:JSON.parse('{!! $videos !!}'),
+                    tags: JSON.parse('{!! $tag !!}'),
                 },
                 mounted:function(){
+
                     this.videos.forEach(v => {
                         up(v);
                     });
