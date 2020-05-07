@@ -22,6 +22,7 @@ class CreateLessonsTable extends Migration
             $table->tinyInteger('iscommend');
             $table->tinyInteger('ishot');
             $table->integer('click');
+            $table->integer('tag_id');
         });
     }
 

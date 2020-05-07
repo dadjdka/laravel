@@ -30,6 +30,7 @@ class TagController extends CommController
      */
     public function create()
     {
+
         return view("admin.tag.create");
     }
 
@@ -41,7 +42,8 @@ class TagController extends CommController
      */
     public function store(TagRequest $request, Tag $model)
     {
-        Tag::create();
+//        Tag::create();
+
         $model->create($request->all());
         return redirect('./admin/tag');
     }

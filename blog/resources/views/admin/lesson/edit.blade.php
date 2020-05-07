@@ -44,7 +44,7 @@
                         <div class="col-sm-10">
                             <select name="tag" class="form-control">
                                 @foreach ($tag as $tags)
-                                <option value="{{$tags['id']}}">{{$tags['name']}}</option>
+                                <option value="{{$tags['id']}}" @if ($tags['id'] == $lesson['tag_id']) selected="selected" @endif>{{$tags['name']}}</option>
                                 @endforeach
                             </select>
                         </div>

@@ -40,7 +40,7 @@
                     <div class="form-group">
                         <label for="" class="col-sm-2 control-label">课程标签</label>
                         <div class="col-sm-10">
-                            <select class="combobox" v-for="tag in v" :key="v,id">
+                            <select class="combobox" name="tag" v-for="tag in v" :key="v,id">
                                 @foreach($tag as $key => $item)
                                 <option value="{{$item['id']}}">{{$item['name']}}</option>
                                 @endforeach

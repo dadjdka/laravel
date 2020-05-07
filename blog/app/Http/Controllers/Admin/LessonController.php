@@ -53,7 +53,15 @@ class LessonController extends CommController
         $leseson['iscommend'] = $request['iscommend'];
         $leseson['ishot'] = $request['ishot'];
         $leseson['click'] = $request['click'];
+        $leseson['tag_id'] = $request['tag'];
+
         $leseson->save();
+
+        $tag_lesson = new TagLesson;
+        $tag_lesson['tag_id'] = $request['tag'];
+        $tag_lesson['lesson_id'] = $leseson->id;
+
+        $tag_lesson->save();
 
         $videos = json_decode($request['videos'],true);
 
@@ -113,20 +121,23 @@ class LessonController extends CommController
         $leseson['iscommend'] = $request['iscommend'];
         $leseson['ishot'] = $request['ishot'];
         $leseson['click'] = $request['click'];
+        $leseson['tag_id'] = $request['tag'];
+
+
         $leseson->save();
 
         $tag_lesson = TagLesson::where([['tag_id',$request['tag']],['lesson_id',$id]])->get();
 
 
         if (count($tag_lesson) == 0){
-            $tag_lesson = TagLesson::created();
+            $tag_lesson = new TagLesson();
             $tag_lesson['tag_id'] = $request['tag'];
             $tag_lesson['lesson_id'] = $id;
 
             $tag_lesson->save();
         }
 
-        $tag_lesson['tag_id'] = $request['tag'];
+//        $tag_lesson['tag_id'] = $request['tag'];
 
 
         Video::where('lesson_id',$id)->delete();

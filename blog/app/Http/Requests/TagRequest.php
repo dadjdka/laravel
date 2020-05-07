@@ -24,6 +24,7 @@ class TagRequest extends FormRequest
             'name' => 'sometimes|required',
 
         ];
+
     }
 
     public function messages()
