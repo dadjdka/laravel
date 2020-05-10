@@ -24,9 +24,9 @@ class OssController extends Controller
         // dd($vid->getClientOriginalExtension());
         // dd($vid->getRealPath());
         // dd($vid->getClientOriginalName());
-    //    $id = 'LTAI4FgLj2Cfe75q61BEeAbW';
-    //    $key = 'bGpvpAcHuu0QzpG2k6xHm1CiRU7Swg';
-    //    $host = 'http://laravel6-video.oss-cn-beijing.aliyuncs.com';
+        $id = env('OSS_id');
+        $key = env('OSS_key');
+        $host = env('OSS_host');
 
 
        $dir = "video/";
