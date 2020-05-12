@@ -1,5 +1,6 @@
 <?php
 
+Route::any('mail','Component\MailController@send');
 
 Route::group(['prefix' => "admin",'namespace' => 'Admin'],function(){
     //后台登录
