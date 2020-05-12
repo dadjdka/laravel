@@ -18,7 +18,7 @@ class OssController extends Controller
 
 
 
-    dd($request->file());
+    // dd($request->file());
 
        $vid = $request->file('file_data');
         // dd($vid->getClientOriginalExtension());
